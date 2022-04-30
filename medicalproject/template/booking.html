@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Page</title>
+    <style>
+    body{
+           background-image: url('https://cdn1.vectorstock.com/i/1000x1000/53/00/blue-medical-background-with-text-space-vector-25875300.jpg');
+             background-repeat: no-repeat;
+               background-size: 100% 160%;
+            }
+    </style>
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <!-- style css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- Responsive-->
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+  <!-- Scrollbar Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+
+    <script language="javascript" type="text/javascript">
+    function dynamicdropdown(listindex)
+    {
+        switch (listindex)
+        {
+        case "thiruvananthapuram" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Kazhkootam","kazhakootam");
+            document.getElementById("subbranch").options[2]=new Option("Palayam","palayam");
+            break;
+        case "kollam" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Parippally","parippally");
+            document.getElementById("subbranch").options[2]=new Option("Chathanoor","Chathanoor");
+            break;
+        case "alappuzha" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Mavelikara","mavelikara");
+            document.getElementById("subbranch").options[2]=new Option("Harippad","harippad");
+            break;
+        case "kottayam" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Pala","pala");
+            document.getElementById("subbranch").options[2]=new Option("Vaikkom","vaikkom");
+            break;
+        case "ernakulam" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Vytilla","vytilla");
+            document.getElementById("subbranch").options[2]=new Option("Aluva","aluva");
+
+            break;
+        case "thrissur" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Chalakudy","chalakudy");
+            document.getElementById("subbranch").options[2]=new Option("Irinjalakuda","irinjalakuda");
+            break;
+        case "kozhikode" :
+            document.getElementById("subbranch").options[0]=new Option("Select sub-branch","");
+            document.getElementById("subbranch").options[1]=new Option("Perambara","perambara");
+            document.getElementById("subbranch").options[2]=new Option("Vadakara","vadakara");
+            break;
+        }
+        return true;
+    }
+    </script>
+</head>
+<body>
+<div class="container-fluid"  style="text-align:center">
+<!--<h2 style="color:white">BOOK HERE</h2>-->
+<div class="container" style="text-align:center">
+    <h2 style="color:white">BOOK HERE</h2><br>
+ <form  action="booking" method="post">
+     {% csrf_token %}
+
+     <input type="text" name="username" placeholder="Enter Your name"><br><br>
+     <input type="text" name="phone" placeholder="Mobile"><br><br>
+     <input type="email" name="email" placeholder="Enter Email"><br><br>
+     <input type="text" name="address" placeholder="Address"><br><br>
+
+
+         <div class="category_div" id="category_div">
+        <select id="source" name="source" style="width:200px;" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
+        <option value="">Select Branch</option>
+        <option value="thiruvananthapuram">Thiruvananthapuram</option>
+        <option value="kollam">Kollam</option>
+            <option value="alappuzha"> Alappuzha </option>
+            <option value="kottayam"> Kottayam </option>
+            <option value="ernakulam"> Ernakulam </option>
+            <option value="thrissur"> Thrissur </option>
+            <option value="kozhikode"> Kozhikode </option>
+        </select>
+    </div>
+     <br>
+    <div class="sub_category_div" id="sub_category_div" >
+        <script type="text/javascript" language="JavaScript">
+        document.write('<select name="subbranch" id="subbranch" style="width:200px;"><option value="">Select Sub-Branch</option></select>')
+        </script>
+<!--        <noscript>-->
+<!--        <select id="subbranch" name="subbranch" style="width:200px;">-->
+<!--            <option value="open">OPEN</option>-->
+<!--            <option value="delivered">DELIVERED</option>-->
+<!--        </select>-->
+<!--        </noscript>-->
+    </div>
+     <br>
+     <select name="cars" id="cars" style="width:140px;" >
+       <option>Select Medicine</option>
+       <optgroup label="Allopathy">
+         <option value="Paracetamo">Paracetamo</option>
+         <option value="Citrem Plus">Citrem Plus</option>
+       </optgroup>
+       <optgroup label="Ayurvedic">
+         <option value="Flurina">Flurina</option>
+         <option value="Vplate Capsules">Vplate Capsules</option>
+       </optgroup>
+     </select>
+     <select name="dropdown" style="width:60px;" >
+          <ol class="dropdown-menu">
+              <option> -Qty- </option>
+              <option> 0 </option>
+              <option> 1 </option>
+              <option> 2 </option>
+              <option> 3 </option>
+              <option> 4 </option>
+              <option> 5 </option>
+              <option> 6 </option>
+              <option> 7 </option>
+              <option> 8 </option>
+              <option> 9 </option>
+
+          </ol>
+
+     </select>
+     <br><br>
+
+     <input type="submit" value="Place Order" style="width:100px;">
+
+    </form>
+    <br>
+    <form  method="post" action="/">
+        {% csrf_token %}
+        <input type="submit" value="Home" style="width:100px;">
+    </form>
+
+</div>
+    <br>
+      <div style="text-align:center">
+    {% for msg in messages %}
+       <h4 style="color:white">{{msg}}</h4>
+      {% endfor %}
+  </div>
+
+</div>
+          <script src="{% static 'js/jquery.min.js' %}"></script>
+          <script src="{% static 'js/popper.min.js' %}"></script>
+          <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+          <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+          <script src="{% static 'js/plugin.js' %}"></script>
+          <!-- sidebar -->
+          <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+          <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+</body>
+</html>
